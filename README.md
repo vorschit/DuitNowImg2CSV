@@ -5,3 +5,6 @@ If you are merchant in Malaysia, doing business and implement as DuitNow or QR p
 
 ## Objective
 Objective of this project is basically to extract receipt from QR code and then convert into CSV
+
+## Testing Sample
+Using Receipt from MAE. Moving onward once MAE set is completed
