@@ -1,10 +1,10 @@
 # DuitNowImg2CSV
 
 ## Problem Statement
-If you are merchant in Malaysia, doing business and implement as DuitNow or QR payment as medium of transaction, It will causing a lot of issue if you want to track your sale. Therefore this repository were aim to convert image receipt into CSV
+As a merchant in Malaysia using DuitNow or QR payments for transactions, tracking sales can be challenging. This repository aims to address this issue by converting image-based receipts into CSV format for easier sales tracking.
 
 ## Objective
-Objective of this project is basically to extract receipt from QR code and then convert into CSV
+The goal of this project is to extract receipt data from QR codes and convert it into a CSV format.
 
 ## Testing Sample
-Using Receipt from MAE. Moving onward once MAE set is completed
+The initial testing will use receipts from MAE, with plans to expand once the MAE set is fully processed.
