@@ -3,16 +3,28 @@ from pytesseract import pytesseract
 import glob
 import os
 import re
-import pandas
+import pandas as pd
 
 Rm=[]
 date = []
 merchantName= []
 fileNameError= []
+referenceID = []
 null="NULL"
 
 #define your tesseract.exe file path
 path_to_tesseract = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+def toCSV():
+    dfRM = pd.DataFrame(Rm,columns=['Price'])
+    dfDate = pd.DataFrame(date,columns=['Date'])
+    dfMerchantName = pd.DataFrame(merchantName, columns=['Store'])
+    dfRefID = pd.DataFrame(referenceID, columns=['Reference ID'])
+    
+    completeDf = pd.concat([dfDate,dfMerchantName,dfRefID,dfRM], axis=1)
+    completeDf.to_csv('output.csv',index=False)
+    
+    return completeDf
 
 def convertImage2Text(img):
     pytesseract.tesseract_cmd = path_to_tesseract 
@@ -39,13 +51,21 @@ def convertText2Field(img2text,file):
     else:
         date.append(null)
     
-    #testing    
+    #extract value of merchant   
     merchant = re.search ("Merchant Name\n([^\n]*)", img2text)
     if merchant:
         merchant = merchant.group(1)
         merchantName.append(merchant)
     else:
         merchantName.append(null)
+    
+    #extract value of ReferenceID    
+    refID = re.search ("Reference ID\n([^\n]*)", img2text)
+    if refID:
+        refID = refID.group(1)
+        referenceID.append(refID)
+    else:
+        referenceID.append(null)
     
     
 #_____________________________________________________________extract value of merchant_____________________________________________________________________________
@@ -79,9 +99,6 @@ if __name__=="__main__":
         img2text = convertImage2Text(file)
         
         toList= convertText2Field(img2text=img2text,file=file)
+        #print(img2text) # testing to display value of raw text
         
-    print(merchantName)
-        
-    
-        
-    
+    print(toCSV())
